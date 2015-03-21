@@ -11,6 +11,12 @@ public class Hydrovor {
 
     public Hydrovor(Tank tank, int volume)
     {
+        if(tank == null || volume < 0) {
+            throw new IllegalArgumentException();
+        }
+
+        this.tank = tank;
+        this.volume = volume;
     }
 
     public void on()
@@ -30,7 +36,12 @@ public class Hydrovor {
      */
     public int getWater()
     {
-        return 0;
+        if(volume > 0){
+            volume--;
+            return 1;
+        } else {
+            return 0;
+        }
     }
 
     /**
