@@ -6,7 +6,7 @@ package hydrovor;
 public class Hydrovor {
 
     private Tank tank;
-
+    private boolean isOn;
     private int volume;
 
     public Hydrovor(Tank tank, int volume)
@@ -17,16 +17,17 @@ public class Hydrovor {
 
         this.tank = tank;
         this.volume = volume;
+        isOn = false;
     }
 
     public void on()
     {
-
+        isOn = true;
     }
 
     public void off()
     {
-
+        isOn = false;
     }
 
     /**
@@ -49,6 +50,8 @@ public class Hydrovor {
      */
     public void tick()
     {
-
+        if(isOn){
+            volume++;
+        }
     }
 }
