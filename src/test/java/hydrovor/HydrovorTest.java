@@ -49,6 +49,19 @@ public class HydrovorTest {
     }
 
     @Test
+    public void tick_callWhenOnAndTankEmpty_return0(){
+        //given
+        Hydrovor hydrovor = new Hydrovor(new Tank(1, 0), 0);
+        //when
+        hydrovor.on();
+        hydrovor.tick();
+        //then
+        int result = hydrovor.getWater();
+        assertEquals(0, result);
+    }
+
+
+    @Test
     public void tick_callWhenOffAndEmpty_return0(){
         //given
         Hydrovor hydrovor = new Hydrovor(new Tank(1, 1), 0);

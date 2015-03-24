@@ -51,7 +51,7 @@ public class Hydrovor {
     public void tick()
     {
         if(isOn){
-            volume++;
+            volume += tank.getWater();
         }
     }
 }
