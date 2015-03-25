@@ -11,6 +11,7 @@ public class Hydrovor {
 
     public Hydrovor(Tank tank, int volume)
     {
+        this.volume = volume;
     }
 
     public void on()
@@ -30,7 +31,9 @@ public class Hydrovor {
      */
     public int getWater()
     {
-        return 0;
+        if(volume == 0) return 0;
+
+        return 1;
     }
 
     /**

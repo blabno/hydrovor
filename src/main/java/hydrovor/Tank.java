@@ -11,6 +11,8 @@ public class Tank {
 
     public Tank(int maxVolume, int volume)
     {
+        this.maxVolume = maxVolume;
+        this.volume = volume;
     }
 
     /**
@@ -20,7 +22,7 @@ public class Tank {
      */
     public int getWater()
     {
-        return 0;
+        return volume <= 0 ? 0 : 1;
     }
 
     /**
@@ -34,6 +36,6 @@ public class Tank {
      */
     public int addWater(int volume)
     {
-        return 0;
+        return maxVolume-this.volume;
     }
 }
