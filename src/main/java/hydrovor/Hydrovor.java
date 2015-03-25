@@ -44,4 +44,9 @@ public class Hydrovor {
     	if(isOn)
     		volume += tank.getWater();
     }
+    
+    public int getVolume() {
+    	return volume;
+    }
+    
 }
