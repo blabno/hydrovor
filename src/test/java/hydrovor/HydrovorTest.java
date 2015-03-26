@@ -23,7 +23,7 @@ public class HydrovorTest {
 	}
 	
 	@Test
-	public void getWater_notEmpty_returns1() {
+	public void getWater_isNotEmpty_returns1() {
 		// Given
 		Hydrovor hydrovor = new Hydrovor(new Tank(1, 1), 1);
 		// When
@@ -33,17 +33,18 @@ public class HydrovorTest {
 	}
 	
 	@Test
-	public void getWater_notEmpty_decrementsVolume() {
+	public void getWater_isNotEmpty_decrementsVolume() {
 		// Given
 		Hydrovor hydrovor = new Hydrovor(new Tank(1, 1), 2);
 		// When
 		hydrovor.getWater();
+		int result = hydrovor.getVolume();
 		// Then
-		assertEquals(1, hydrovor.getVolume());
+		assertEquals(1, result);
 	}
 	
 	@Test
-	public void getWater_empty_returns0() {
+	public void getWater_isEmpty_returns0() {
 		// Given
 		Hydrovor hydrovor = new Hydrovor(new Tank(1, 1), 0);
 		// When
@@ -53,15 +54,50 @@ public class HydrovorTest {
 	}
 	
 	@Test
-	public void getWater_empty_doesNotChangeVolume() {
+	public void getWater_isEmpty_doesNotChangeVolume() {
 		// Given
 		Hydrovor hydrovor = new Hydrovor(new Tank(1, 1), 0);
 		// When
 		hydrovor.getWater();
+		int result = hydrovor.getVolume();
 		// Then
-		assertEquals(0, hydrovor.getVolume());	
+		assertEquals(0, result);	
 	}
 	
-	// TODO tests for tick()
+	@Test
+	public void tick_calledWhenOnAndEmpty_returns1() {
+		// Given
+		Hydrovor hydrovor = new Hydrovor(new Tank(1, 1), 0);
+		// When
+		hydrovor.on();
+		hydrovor.tick();
+		// Then
+		int result = hydrovor.getWater();
+		assertEquals(1, result);
+	}
+	
+	@Test
+	public void tick_calledWhenOffAndEmpty_returns0() {
+		// Given
+		Hydrovor hydrovor = new Hydrovor(new Tank(1, 1), 0);
+		// When
+		hydrovor.off();
+		hydrovor.tick();
+		// Then
+		int result = hydrovor.getWater();
+		assertEquals(0, result);	
+	}
+	
+	@Test
+	public void tick_calledWhenOnAndTankEmpty_returns0() {
+		// Given
+		Hydrovor hydrovor = new Hydrovor(new Tank(1, 0), 0);
+		// When
+		hydrovor.on();
+		hydrovor.tick();
+		// Then
+		int result = hydrovor.getWater();
+		assertEquals(0, result);
+	}
 	
 }
