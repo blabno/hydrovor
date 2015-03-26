@@ -77,6 +77,12 @@ public class TankTest {
 		assertEquals(0, result);	
 	}
 	
+	@Test 
+	public void addWater_volumeLessThanZero_throwException() {
+		exception.expect(IllegalArgumentException.class);
+		new Tank(1, 1).addWater(-1);
+	}
+	
 	@Test
 	public void addWater_isFullyFilled_rejectWholeVolume() {
 		// Given

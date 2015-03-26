@@ -38,6 +38,8 @@ public class Tank {
      * @return amount of accepted water
      */
     public int addWater(int volume) {
+    	if(volume < 0)
+    		throw new IllegalArgumentException();
         int availableVolume = maxVolume - this.volume;
         if(availableVolume >= volume) {
         	this.volume += volume;
