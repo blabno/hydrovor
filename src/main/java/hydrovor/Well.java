@@ -9,6 +9,8 @@ public class Well {
 
     public Well(int volume)
     {
+        if (volume<0)
+            throw new IllegalArgumentException();
         this.volume=volume;
     }
 
@@ -19,6 +21,10 @@ public class Well {
      */
     public void addWater(int volume)
     {
+        if (volume<0 )
+            throw new IllegalArgumentException();
+
+        this.volume+=volume;
     }
 
     /**
@@ -32,6 +38,19 @@ public class Well {
      */
     public int getWater(int desiredVolume)
     {
-        return (volume-desiredVolume);
+        if(desiredVolume < 0)
+            throw new IllegalArgumentException();
+
+
+        if(desiredVolume <= volume){
+                volume -= desiredVolume;
+                return desiredVolume;
+         }
+        else {
+                int help = volume;
+                 volume = 0;
+                return help;
+         }
     }
-}
+    }
+
