@@ -102,12 +102,11 @@ public class TankTest {
         int toAdd = 5;
 
         //when
+        tank.addWater(5);
         int volume = tank.getVolume();
-        int result = tank.addWater(toAdd);
-        int afterIncrement = volume + result;
 
         //then
-        Assert.assertEquals(volume + toAdd, afterIncrement);
+        Assert.assertEquals(6, volume);
     }
 
 
