@@ -1,13 +1,34 @@
 package hydrovor;
 
 import org.junit.Assert;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
+import org.mockito.Mockito;
 
 public class TankTest {
+
+    private Tank tank = Mockito.mock(Tank.class);
+
+    @Rule
+    public ExpectedException exception = ExpectedException.none();
+
+    @Test
+    public void construktor_maxVolumeNoPositive_throwException(){
+        exception.expect(IllegalArgumentException.class);
+        new Tank(-1, 1);
+    }
+
+    @Test
+    public void construktor_volumeNoPositive_throwException(){
+        exception.expect(IllegalArgumentException.class);
+        new Tank(1, -1);
+    }
 
 
     @Test
     public void getWater_zeroVolume_doesNotChange() {
+
         //given
         Tank tank = new Tank(1, 0);
 

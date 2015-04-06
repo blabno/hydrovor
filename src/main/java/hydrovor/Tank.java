@@ -31,7 +31,6 @@ public class Tank {
         }else{
             return 0;
         }
-
     }
 
     /**

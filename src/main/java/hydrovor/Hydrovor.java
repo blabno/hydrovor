@@ -1,5 +1,4 @@
 package hydrovor;
-
 /**
  * Hydrovor provides water to Sink and gets water from Tank
  */
@@ -8,19 +7,25 @@ public class Hydrovor {
     private Tank tank;
 
     private int volume;
+    private boolean isOn;
 
     public Hydrovor(Tank tank, int volume)
     {
+        if(tank==null || volume<0){
+            throw new IllegalArgumentException();
+        }
+        this.tank = tank;
+        this.volume = volume;
     }
 
     public void on()
     {
-
+        this.isOn = true;
     }
 
     public void off()
     {
-
+        this.isOn = false;
     }
 
     /**
@@ -30,7 +35,12 @@ public class Hydrovor {
      */
     public int getWater()
     {
-        return 0;
+        if(volume>0){
+            volume--;
+            return 1;
+        }else{
+            return 0;
+        }
     }
 
     /**
@@ -38,6 +48,9 @@ public class Hydrovor {
      */
     public void tick()
     {
-
+        if(isOn){
+            volume += tank.getWater();
+        }
     }
+
 }
