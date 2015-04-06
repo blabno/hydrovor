@@ -6,21 +6,27 @@ package hydrovor;
 public class Tank {
 
     private int maxVolume;
-
     private int volume;
 
-    public Tank(int maxVolume, int volume)
-    {
-    }
+    public Tank(int maxVolume, int volume){
+   	if(maxVolume <= 0 || volume < 0 || volume > maxVolume)
+             throw new IllegalArgumentException();
+    	this.maxVolume = maxVolume;
+    	this.volume = volume;
+    }		     
 
     /**
      * Simulates water out flow.
      *
      * @return 1 when there is any water (volume) and decrements volume; 0 otherwise
      */
-    public int getWater()
-    {
-        return 0;
+    public int getWater(){
+        if (volume > 0){
+            volume--;
+            return 1;
+        }
+        else
+            return 0;
     }
 
     /**
@@ -32,8 +38,8 @@ public class Tank {
      *
      * @return amount of accepted water
      */
-    public int addWater(int volume)
-    {
+    
+    public int addWater(int volume){
         return 0;
     }
 }
