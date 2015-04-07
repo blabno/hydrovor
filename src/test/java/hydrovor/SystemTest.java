@@ -40,7 +40,7 @@ public class SystemTest {
     public void simulation_wellNotEmpty_waterAvailableInSink() throws Exception
     {
         //        Given
-        hydrovor.hydrovorOn();
+        hydrovor.on();
         pump.on();
 
         //        When
