@@ -18,6 +18,7 @@ public class Well {
      *
      * @param volume amount of water that flows in
      */
+    
     public void addWater(int volume){
         if(volume < 0)
             throw new IllegalArgumentException();
@@ -33,6 +34,7 @@ public class Well {
      *
      * @return actual amount of water that is going out
      */
+    
     public int getWater(int desiredVolume)
     {
         if(desiredVolume < 0)

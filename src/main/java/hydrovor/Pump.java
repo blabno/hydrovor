@@ -26,6 +26,7 @@ public class Pump {
      * <p/>
      * In case tank is not able to accept whole volume of water the remaining volume must be returned to well.
      */
+    
     public void tick(){
         if(isOn){
             int waterFromWell = well.getWater(1);
