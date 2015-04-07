@@ -1,98 +1,155 @@
 package hydrovor;
 
 import org.junit.Assert;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
+import org.mockito.Mockito;
 
 public class TankTest {
 
+    private Tank tank = Mockito.mock(Tank.class);
+
+    @Rule
+    public ExpectedException exception = ExpectedException.none();
+
     @Test
-    public void getWater_zeroVolume_returnZero() {
-        //Given
-        Tank tank = new Tank(0,0);
-        //When
+    public void construktor_maxVolumeNoPositive_throwException(){
+        exception.expect(IllegalArgumentException.class);
+        new Tank(-1, 1);
+    }
+
+    @Test
+    public void construktor_volumeNoPositive_throwException(){
+        exception.expect(IllegalArgumentException.class);
+        new Tank(1, -1);
+    }
+
+
+    @Test
+    public void getWater_zeroVolume_doesNotChange() {
+
+        //given
+        Tank tank = new Tank(1, 0);
+
+        //when
+        tank.getWater();
+        int result = tank.getVolume();
+
+        //then
+        Assert.assertEquals(0, result);
+    }
+
+
+    @Test
+    public void getWater_zeroVolume_returnsZero() {
+        //given
+        Tank tank = new Tank(1, 0);
+
+        //when
         int result = tank.getWater();
-        //Then
-        Assert.assertEquals(0,result);
+
+        //then
+        Assert.assertEquals(0, result);
     }
 
-    @Test
-    public void getWater_zeroVolume_doesNotChangeVolume() {
-        //Given
-
-        //When
-
-        //Then
-
-    }
-
-    @Test
-    public void getWater_positiveVolume_returnOne() {
-        //Given
-        Tank tank = new Tank(0,1);
-        //When
-        int result = tank.getWater();
-        //Then
-        Assert.assertEquals(1,result);
-    }
 
     @Test
     public void getWater_positiveVolume_decrementsVolume() {
-        //Given
+        //given
+        Tank tank = new Tank(1, 1);
 
-        //When
+        //when
+        tank.getWater();
+        int result = tank.getVolume();
 
-        //Then
-
+        //then
+        Assert.assertEquals(0, result);
     }
+
 
     @Test
-    public void addWater_moreAvailableSpaceThanAddedWater_returnsSameVolumeAsParam() {
-        //Given
+    public void getWater_positiveVolume_returnsOne() {
+        //given
+        Tank tank = new Tank(1, 1);
 
-        //When
+        //when
+        int result = tank.getWater();
 
-        //Then
-
+        //then
+        Assert.assertEquals(1, result);
     }
+
 
     @Test
-    public void addWater_moreAvailableSpaceThanAddedWater_incrementVolumeByValueOfParam() {
-        //Given
+    public void addWater_moreAvailableSpaceThanAddedWater_returnsSameValueAsParam() {
+        //given
+        Tank tank = new Tank(10, 1);
+        int toAdd = 5;
 
-        //When
+        //when
+        int result = tank.addWater(toAdd);
 
-        //Then
-
+        //then
+        Assert.assertEquals(toAdd, result);
     }
+
+
+    @Test
+    public void addWater_moreAvailableSpaceThanAddedWater_incrementVolumeByVolumeOfParam() {
+        //given
+        Tank tank = new Tank(10, 1);
+        int toAdd = 5;
+
+        //when
+        tank.addWater(5);
+        int volume = tank.getVolume();
+
+        //then
+        Assert.assertEquals(6, volume);
+    }
+
 
     @Test
     public void addWater_lessAvailableSpaceThanAddedWater_returnsAcceptedWater() {
-        //Given
-        final Tank tank = new Tank(2,1);
-        //When
+        //given
+        final Tank tank = new Tank(2, 1);
+
+        //when
         final int result = tank.addWater(2);
-        //Then
-        Assert.assertEquals(1,result);
+
+        //then
+        Assert.assertEquals(1, result);
     }
+
 
     @Test
     public void addWater_lessAvailableSpaceThanAddedWater2_returnsAcceptedWater() {
-        //Given
-        final Tank tank = new Tank(2,2);
-        //When
-        final int result = tank.addWater(1);
-        //Then
-        Assert.assertEquals(0,result);
+        //given
+        final Tank tank = new Tank(2, 2);
+
+        //when
+        final int result = tank.addWater(2);
+
+        //then
+        Assert.assertEquals(0, result);
     }
+
 
     @Test
     public void addWater_lessAvailableSpaceThanAddedWater_incrementVolumeToMeetMaxVolume() {
-        //Given
+        //given
+        final int max = 10;
+        final int toAdd = 7;
+        Tank tank = new Tank(max, 5);
 
-        //When
+        //when
+        int volume = tank.getVolume();
+        int result = tank.addWater(toAdd);
 
-        //Then
-
+        //then
+        Assert.assertEquals(max - volume, result);
     }
-    //todo IMPLEMENT constructor test
+
+
 }

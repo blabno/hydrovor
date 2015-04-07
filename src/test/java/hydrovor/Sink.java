@@ -9,6 +9,10 @@ public class Sink {
 
     public Sink(Hydrovor hydrovor)
     {
+        if(hydrovor == null){
+            throw new NullPointerException();
+        }
+        this.hydrovor = hydrovor;
     }
 
     /**
@@ -18,6 +22,7 @@ public class Sink {
      */
     public int getWater()
     {
-        return 0;
+
+        return hydrovor.getWater();
     }
 }
