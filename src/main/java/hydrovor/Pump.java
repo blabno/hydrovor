@@ -6,17 +6,28 @@ public class Pump {
 
     private Well well;
 
+    private boolean on;
+
     public Pump(Tank tank, Well well)
     {
+        if(tank == null || well == null)
+        {
+            throw new IllegalArgumentException();
+        }
 
+        this.tank = tank;
+        this.well = well;
+        this.on = false;
     }
 
     public void on()
     {
+        this.on = true;
     }
 
     public void off()
     {
+        this.on = false;
     }
 
     /**
@@ -26,6 +37,17 @@ public class Pump {
      */
     public void tick()
     {
+        if(on)
+        {
+            int wellWater = well.getWater(1);
+            int tankWater = tank.addWater(wellWater);
+
+            if(tankWater != wellWater)
+            {
+                well.addWater(wellWater - tankWater);
+            }
+
+        }
 
     }
 }

@@ -8,19 +8,26 @@ public class Hydrovor {
     private Tank tank;
 
     private int volume;
+    private boolean turnOn;
 
     public Hydrovor(Tank tank, int volume)
     {
+        if(tank == null || volume < 0){
+            throw new IllegalArgumentException();
+        }
+        this.tank = tank;
+        this.volume = volume;
+        this.turnOn = false;
     }
 
     public void on()
     {
-
+        turnOn = true;
     }
 
     public void off()
     {
-
+        turnOn = false;
     }
 
     /**
@@ -30,14 +37,27 @@ public class Hydrovor {
      */
     public int getWater()
     {
-        return 0;
+        if(volume>0)
+        {
+            volume--;
+            return 1;
+        }
+        else
+        {
+            return 0;
+        }
     }
 
     /**
      * When Hydrovor is on increments volume by value provided from Tank.
      */
+
     public void tick()
     {
+        if(turnOn)
+        {
+            volume +=tank.getWater();
+        }
 
     }
 }
