@@ -9,24 +9,29 @@ public class Hydrovor {
 
     private int volume;
 
-    public Hydrovor(int volume){
-        this.volume = volume;
-    }
+    //when set to true that mean it works.
+    private boolean stateOn;
+
 
     public Hydrovor(Tank tank, int volume)
     {
+        if(tank == null || volume < 0){
+            throw new IllegalArgumentException();
+        }
 
+        this.tank = tank;
+        this.volume = volume;
 
     }
 
-    public void on()
+    public void hydrovorOn()
     {
-
+        stateOn = true;
     }
 
-    public void off()
+    public void hydrovorOff()
     {
-
+        stateOn = false;
     }
 
     /**
@@ -34,17 +39,18 @@ public class Hydrovor {
      *
      * @return 1 when there is any water (volume) and decrements volume; 0 otherwise
      */
-    public int getWater(int decrement_volume)
+    public int getWater()
     {
         if (volume > 0) {
-            volume = volume - decrement_volume;
+            volume--;
             return 1;
 
 
         }
 
-            else
+            else {
             return 0;
+        }
     }
 
     /**
@@ -52,6 +58,9 @@ public class Hydrovor {
      */
     public void tick()
     {
+        if(stateOn){
+            volume = tank.getWater();
 
+         }
     }
 }
