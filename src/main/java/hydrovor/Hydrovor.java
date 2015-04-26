@@ -9,18 +9,26 @@ public class Hydrovor {
 
     private int volume;
 
+    private boolean isOn;
+
     public Hydrovor(Tank tank, int volume)
     {
+        if(tank == null || volume <0)
+            throw new IllegalArgumentException();
+
+        this.tank = tank;
+        this.volume = volume;
+        this.isOn = false;
     }
 
     public void on()
     {
-
+        isOn = true;
     }
 
     public void off()
     {
-
+        isOn = false;
     }
 
     /**
@@ -30,7 +38,12 @@ public class Hydrovor {
      */
     public int getWater()
     {
-        return 0;
+        if(volume > 0){
+            volume--;
+            return 1;
+        } else {
+            return 0;
+        }
     }
 
     /**
@@ -38,6 +51,12 @@ public class Hydrovor {
      */
     public void tick()
     {
+        if(isOn){
+            volume += tank.getWater();
+        }
+    }
 
+    public int getVolume() {
+        return volume;
     }
 }
