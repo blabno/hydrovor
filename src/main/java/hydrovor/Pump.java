@@ -3,20 +3,26 @@ package hydrovor;
 public class Pump {
 
     private Tank tank;
-
     private Well well;
+    private boolean isOn;
+
 
     public Pump(Tank tank, Well well)
     {
-
+        if(tank == null || well == null)
+            throw new IllegalArgumentException();
+        this.tank = tank;
+        this.well = well;
     }
 
     public void on()
     {
+        this.isOn = true;
     }
 
     public void off()
     {
+        this.isOn = false;
     }
 
     /**
@@ -26,6 +32,12 @@ public class Pump {
      */
     public void tick()
     {
-
+        if(isOn){
+            int waterWell = well.getWater(1);
+            int waterTank = tank.addWater(waterWell);
+            if(waterTank != waterWell){
+                well.addWater(waterWell - waterTank);
+            }
+        }
     }
 }
