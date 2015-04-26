@@ -9,8 +9,14 @@ public class Hydrovor {
 
     private int volume;
 
+    public Hydrovor(int volume){
+        this.volume = volume;
+    }
+
     public Hydrovor(Tank tank, int volume)
     {
+
+
     }
 
     public void on()
@@ -28,9 +34,17 @@ public class Hydrovor {
      *
      * @return 1 when there is any water (volume) and decrements volume; 0 otherwise
      */
-    public int getWater()
+    public int getWater(int decrement_volume)
     {
-        return 0;
+        if (volume > 0) {
+            volume = volume - decrement_volume;
+            return 1;
+
+
+        }
+
+            else
+            return 0;
     }
 
     /**
