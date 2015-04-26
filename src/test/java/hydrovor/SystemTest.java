@@ -15,8 +15,7 @@ public class SystemTest {
     private Pump pump;
 
     @Before
-    public void setUp() throws Exception
-    {
+    public void setUp() throws Exception {
         well = new Well(0);
         Tank tank = new Tank(2, 0);
         pump = new Pump(tank, well);
@@ -25,8 +24,7 @@ public class SystemTest {
     }
 
     @Test
-    public void simulation_everythingEmpty_noWaterInSink() throws Exception
-    {
+    public void simulation_everythingEmpty_noWaterInSink() throws Exception {
         //        Given
 
         //        When
@@ -37,8 +35,7 @@ public class SystemTest {
     }
 
     @Test
-    public void simulation_wellNotEmpty_waterAvailableInSink() throws Exception
-    {
+    public void simulation_wellNotEmpty_waterAvailableInSink() throws Exception {
         //        Given
         hydrovor.on();
         pump.on();
