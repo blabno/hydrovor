@@ -9,6 +9,7 @@ public class Well {
 
     public Well(int volume)
     {
+        this.volume=volume;
     }
 
     /**
@@ -31,6 +32,6 @@ public class Well {
      */
     public int getWater(int desiredVolume)
     {
-        return 0;
+        return (volume-desiredVolume);
     }
 }
