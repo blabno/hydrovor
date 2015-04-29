@@ -9,8 +9,11 @@ public class Tank {
 
     private int volume;
 
-    public Tank(int maxVolume, int volume)
-    {
+    public Tank(int maxVolume, int volume) {
+    	if(maxVolume <= 0 || volume < 0 || volume > maxVolume)
+    		throw new IllegalArgumentException();
+    	this.maxVolume = maxVolume;
+    	this.volume = volume;
     }
 
     /**
@@ -18,9 +21,12 @@ public class Tank {
      *
      * @return 1 when there is any water (volume) and decrements volume; 0 otherwise
      */
-    public int getWater()
-    {
-        return 0;
+    public int getWater() {
+        if(volume > 0) {
+        	volume--;
+        	return 1;
+        } else 
+        	return 0;
     }
 
     /**
@@ -32,8 +38,21 @@ public class Tank {
      *
      * @return amount of accepted water
      */
-    public int addWater(int volume)
-    {
-        return 0;
+    public int addWater(int volume) {
+    	if(volume < 0)
+    		throw new IllegalArgumentException();
+        int availableVolume = maxVolume - this.volume;
+        if(availableVolume >= volume) {
+        	this.volume += volume;
+        	return volume;
+        } else {
+        	this.volume = maxVolume;
+        	return maxVolume - (volume - availableVolume);
+        }
+    }
+    
+    public int getVolume() {
+    	return volume;
     }
 }
+
