@@ -6,38 +6,40 @@ package hydrovor;
 public class Hydrovor {
 
     private Tank tank;
-
+    private boolean isOn;
     private int volume;
 
     public Hydrovor(Tank tank, int volume)
     {
+        if(tank == null || volume < 0){
+            throw new IllegalArgumentException();
+        }
+        this.tank = tank;
+        this.volume = volume;
     }
 
     public void on()
     {
-
+        isOn = true;
     }
-
     public void off()
     {
-
+        isOn = false;
     }
 
-    /**
-     * Simulates water out flow.
-     *
-     * @return 1 when there is any water (volume) and decrements volume; 0 otherwise
-     */
     public int getWater()
     {
-        return 0;
+        if(volume > 0){
+            volume--;
+            return 1;
+        }else{
+            return 0;
+        }
     }
 
-    /**
-     * When Hydrovor is on increments volume by value provided from Tank.
-     */
-    public void tick()
-    {
-
+    public void tick(){
+        if (isOn){
+            volume ++;
+        }
     }
 }
